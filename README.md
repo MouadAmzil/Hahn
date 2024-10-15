@@ -1,4 +1,5 @@
 # 🎟️ Ticket Management API
+ <img src="./Screenshot 2024-10-15 143245.png"/>
 
 A simple web application for managing tickets using .NET 8 and SQLite. This project implements CRUD functionality with sorting and filtering.
 
