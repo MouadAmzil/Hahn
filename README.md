@@ -20,12 +20,12 @@ Make sure you have the following installed:
 Open your terminal and clone the repository:
 
 ```bash
-git clone https://github.com/MouadAmzil/ticket-management-api.git
+https://github.com/MouadAmzil/Hahn.git
 ```
-###  📁 Navigate to the Project Directory
+###  📁 Navigate to the Project Directory Backend
 
 ```bash
-cd ticket-management-api
+cd Hahn Task
 ```
 ### 🔧 Restore Dependencies
 Run the following command to restore the required packages:
@@ -52,7 +52,7 @@ Start the API with:
 ```bash
 dotnet run
 ```
-The API will be running at http://localhost:5000 (or https://localhost:5001 if you choose to use HTTPS).
+The API will run at http://localhost:5000 (or https://localhost:5001 if you choose to use HTTPS).
 
 ### 🌐 API Documentation
 You can view the API documentation by navigating to https://localhost:5001/swagger in your web browser.
