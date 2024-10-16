@@ -1,0 +1,58 @@
+<div class="container">
+    <h2>Ticket Management</h2>
+    <p-table [value]="tickets" [paginator]="true" [rows]="10" sortField="date" [responsive]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="description">Ticket Id <p-sortIcon field="description"></p-sortIcon></th>
+                <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
+                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ticket>
+            <tr>
+                <td>{{ ticket.ticketId }}</td>
+                <td>{{ ticket.description }}</td>
+                <td>{{ getStatusLabel(ticket.status) }}</td>
+                <td>{{ ticket.date | date }}</td>
+                <td style="    text-align: end;">
+                    <button pButton icon="pi pi-pencil" class="table-btn" (click)="editTicket(ticket)"></button>
+                    <button pButton icon="pi pi-trash" class="table-btn" style="color: red !important;"
+                        (click)="deleteTicket(ticket.ticketId)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <button pButton label="Add New" class="add-btn" icon="pi pi-plus" (click)="showDialogToAdd()"></button>
+    <p-dialog
+        header="{{ isEdit ? (displayDialog ? 'Edit Ticket' : 'Edit Profile') : (displayDialog ? 'Add Ticket' : 'Edit Profile') }}"
+        [(visible)]="displayDialog " [modal]="true" [style]="{ width: '25rem' }" [responsive]="true">
+        <ng-template pTemplate="content" *ngIf="!displayDialog">
+            <div class="box">
+                <label class="font-semibold w-6rem">Description</label>
+                <input id="description" class="flex-auto" pInputText [(ngModel)]="ticket.description" required />
+            </div>
+            <div class="box">
+                <label for="status" class="font-semibold w-6rem">Status</label>
+                <p-dropdown [options]="statusOptions" class="flex-auto" [(ngModel)]="ticket.status"
+                    appendTo="body"></p-dropdown>
+            </div>
+            <div class="box">
+                <label for="date" class="font-semibold w-6rem">Date</label>
+                <p-calendar id="date" class="flex-auto" type="date" [iconDisplay]="'input'" [showIcon]="true"
+                    [(ngModel)]="ticket.date" required appendTo="body" />
+            </div>
+        </ng-template>
+
+        <!-- Footer Actions -->
+        <ng-template pTemplate="footer">
+            <button pButton label="Cancel" class="btn" style="background-color: transparent; color: #555;"
+                severity="secondary" (click)="hideDialog()"></button>
+            <button pButton label="Save" class="btn" (click)="saveTicket()" severity="success"
+                style="background-color: #16a34a;color: #fff;padding: 5px 15px  !important;"
+                [disabled]="(displayDialog && (!ticket.description || !ticket.date))  "></button>
+        </ng-template>
+    </p-dialog>
+</div>
+<p-toast />
